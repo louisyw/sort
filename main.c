@@ -120,6 +120,30 @@ void quick_sort(int array[], int low, int high)
 	}
 }
 
+/*shell sort*/
+void shellInsert(int *array, int length, int gap)
+{
+	int i,j;
+	for(i = gap; i<length; i++)
+		if (a[i] < a[i-gap]){
+			int temp = a[i];
+			j = i-gap;
+			while(j>=0 && a[j] > temp){
+				a[j+gap] = a[j];
+				j-=gap;
+			}
+			a[j+gap] = temp;
+		}
+}
+
+void shellSort(int *array, int length)
+{
+	int g = length/2;
+	while(g >= 1){
+		shellInsert(array, length, g);
+		g/=2;	
+	}
+}
 int main()
 {
 	int m;
@@ -131,9 +155,10 @@ int main()
 			printf("%d, ",a[m]);
 	}
 	//insert_sort1(a,SIZE);
-	int b[SIZE];
-	merge_sort(a, 0 , SIZE-1, b);
+	//int b[SIZE];
+	//merge_sort(a, 0 , SIZE-1, b);
 	//quick_sort(a, 0, SIZE-1);
+	shellSort(a, SIZE);
 	printf("after sort:\n");
 	for(m =0; m<SIZE; m++){
 		if(m == SIZE-1)
